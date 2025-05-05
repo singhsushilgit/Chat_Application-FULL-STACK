@@ -11,14 +11,18 @@ import path from 'path';
 dotenv.config({});
 const _dirname = path.resolve();
 
-const PORT = process.env.PORT || 8080;
+const PORT=process.env.PORT || 8080;
 
 // middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+const allowedOrigins = [
+  "http://localhost:8080", // local dev
+  process.env.CLIENT_ORIGIN, // deployed frontend
+];
 const corsOption = {
-  origin: "https://chat-application-full-stack-1.onrender.com",
+  origin: allowedOrigins,
   credentials: true,
 };
 app.use(cors(corsOption));
@@ -29,7 +33,7 @@ app.use("/api/v1/message", messageRoute);
 
 
 app.use(express.static(path.join(_dirname, "/frontened/dist")));
-app.get('',(_, res) =>{
+app.get('*',(_, res) =>{
  res.sendFile( path.resolve(_dirname, "frontened", "dist", "index.html"));
 })
 

@@ -5,21 +5,27 @@ import express from "express";
 const app = express();
 
 const server = http.createServer(app);
+const allowedOrigins = ["http://localhost:8080", process.env.CLIENT_ORIGIN];
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000"],
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
+    credentials: true,
   },
+  pingTimeout: 60000,
 });
 
+const userSocketMap = {}; // {userId->socketId}
 export const getReceiverSocketId = (receiverId) => {
   return userSocketMap[receiverId];
 };
 
-const userSocketMap = {}; // {userId->socketId}
 
 io.on("connection", (socket) => {
   const userId = socket.handshake.query.userId;
+
+
+
   if (userId !== undefined) {
     userSocketMap[userId] = socket.id;
   }
