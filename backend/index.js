@@ -11,7 +11,7 @@ import path from 'path';
 dotenv.config({});
 const _dirname = path.resolve();
 
-const PORT=process.env.PORT || 8080;
+const port=process.env.PORT || 8080;
 
 // middleware
 app.use(express.urlencoded({ extended: true }));
@@ -33,11 +33,13 @@ app.use("/api/v1/message", messageRoute);
 
 
 app.use(express.static(path.join(_dirname, "/frontened/dist")));
-app.get('*',(_, res) =>{
- res.sendFile( path.resolve(_dirname, "frontened", "dist", "index.html"));
-})
 
-server.listen(PORT, () => {
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve(_dirname, "frontened", "dist", "index.html"));
+});
+
+
+server.listen(port, () => {
   connectDB();
-  console.log(`Server listen at port ${PORT}`);
+  console.log(`Server listen at port ${port}`);
 });

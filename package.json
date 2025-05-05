@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"npm install && npm install --prefix frontened && npm run build --prefix frontened",
-"start" : "nodemon backend/index.js",
+    "build": "npm install && npm install --prefix frontened && npm run build --prefix frontened",
+    "start": "nodemon backend/index.js",
     "dev": "nodemon backend/index.js"
   },
   "author": "",
@@ -22,6 +22,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.1",
     "nodemon": "^3.1.9",
+    "path-to-regexp": "^6.2.1",
     "socket.io": "^4.8.1"
   }
 }
