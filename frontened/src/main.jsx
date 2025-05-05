@@ -11,7 +11,7 @@ import { persistStore } from "redux-persist";
 let persistor = persistStore(store);
 
 
-export const BASE_URL = "http://localhost:8080";
+export const BASE_URL = "https://chat-application-full-stack-1.onrender.com";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
