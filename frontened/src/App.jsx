@@ -32,7 +32,7 @@ function App() {
 
   useEffect(() => {
     if (authUser) {
-      const socketio = io({
+      const socketio = io(`${BASE_URL}`, {
         query: {
           userId: authUser._id,
         },
